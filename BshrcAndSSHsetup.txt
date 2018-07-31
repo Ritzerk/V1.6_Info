@@ -2,21 +2,24 @@ Guide to connecting to SSH: http://www.reuk.co.uk/wordpress/raspberry-pi/connect
 (check password for the raspberry pi). Current IP is 192.168.4.160:8081.
 
 Setting up on bootup
-To show the file bashrc: ls -la ~/ | more
-If its not on the first page, create with: vi ~/.bashrc
-Put the following to make good permissions: chmod 644 .bashrc
-or just write in the required lines.
-back-up bashrc with this command line: cp .bashrc .bashrc-backup
-Edit bashrc: gedit .bashrc
 
-.bashrc is usually located in the user directory (/home/pi) but may be hidden
+To setup server:
 
-What to write in bashrc?
+sudo nano /etc/rc.local
+--> sudo python /home/pi/1.7_Rasp/picoredlowd.py &
 
-cd V1.6_Fixing-buzzer
-./picoReflowd.py
-chromium-browser --kiosk [inputWebAppAddressHere]     #check if the web address changes?
 
+To setup browser:
+
+cp /etc/xdg/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/autostart
+
+sudo nano /home/pi/.config/lxsession/LXDE-pi/autostart
+-->
+   #@xscreensaver -no-splash  # comment this line out to disable screensaver
+   @xset s off
+   @xset -dpms
+   @xset s noblank
+   @chromium-browser --kiosk http://127.0.0.1:8081/  # load chromium after boot and point to the localhost webserver in full screen mode
 
 
 
